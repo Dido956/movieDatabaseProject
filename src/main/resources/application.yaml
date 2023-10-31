@@ -37,3 +37,5 @@ logging:
     blog: WARN
 server:
   port: 8080
+movieDB:
+  remember.me.key: ${REMEMBER_ME_KEY:rememberMeKey}

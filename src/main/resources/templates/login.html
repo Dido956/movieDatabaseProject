@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'
+>
+<head th:replace="~{fragments/commons::head}">
+</head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+<div class="row align-items-center g-lg-5 py-5">
+    <div class="col-md-10 mx-auto col-lg-5">
+        <h3>Login</h3>
+        <form th:method="post" th:action="@{/login}" class="p-4 p-md-3 border rounded-3 bg-light">
+            <div class="form-floating mb-3">
+                <input id="floatingInput"
+                       name="username"
+                       th:value="${username}"
+                       type="text"
+                       class="form-control"
+                       placeholder="Username: "/>
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingPassword"
+                       name="password"
+                       type="password" min="2"
+                       max="20" class="form-control"
+                       placeholder="Password"/>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <p th:if="${bad_credentials}" class="errors alert alert-danger ">Invalid username or password!</p>
+            <div class="checkbox mb-3">
+                <input id="rememberme"
+                       name="rememberme"
+                       type="checkbox"/>
+                <label class="form-check-label" for="rememberme">Remember me</label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="w-100 btn btn-lg btn-primary" value="Sign Up"/>
+            </div>
+
+            <div class="form-group">
+                <a href="#" class="ForgetPwd">New user? Register now!</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

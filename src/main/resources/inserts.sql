@@ -133,10 +133,23 @@ VALUES ('Rumi Hiiragi', '1987-02-05'),
        ('Cho Yeo-jeong', '1978-02-10');
 
 INSERT INTO movie_actor (movie_id, actor_id)
-VALUES
-    (4, 20), (4, 21), (4, 22), -- Spirited Away
-    (5, 23), (5, 24), (5, 25); -- Parasite
+VALUES (4, 20),
+       (4, 21),
+       (4, 22), -- Spirited Away
+       (5, 23),
+       (5, 24),
+       (5, 25); -- Parasite
 INSERT INTO movie_genre (movie_id, genre_id)
-VALUES
-    (66, 1), (66, 2), -- Spirited Away (Animation, Fantasy)
-    (67, 3), (68, 5), (69, 7); -- Parasite (Comedy, Thriller, Drama)
+VALUES (66, 1),
+       (66, 2), -- Spirited Away (Animation, Fantasy)
+       (67, 3),
+       (68, 5),
+       (69, 7); -- Parasite (Comedy, Thriller, Drama)
+
+INSERT INTO roles (id, role) VALUES (1, 1);
+INSERT INTO roles (id, role) VALUES (2, 2);
+INSERT INTO roles (id, role) VALUES (3, 3);
+INSERT INTO users (id, confirm_password, email, password, username)
+VALUES (1,'tester123','test@abv.bg', 'test123','tester');
+INSERT INTO users_roles (user_id, role_id) VALUES (2,1);
+INSERT INTO users_roles (user_id, role_id) VALUES (3,3);
