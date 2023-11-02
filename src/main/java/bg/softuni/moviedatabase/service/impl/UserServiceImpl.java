@@ -20,11 +20,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRoleRepository userRoleRepository;
+
     @Override
     public boolean register(UserRegisterDTO userRegisterDTO) {
         UserEntity user = new UserEntity();
 
-        if (userRegisterDTO == null){
+        if (userRegisterDTO == null) {
             return false;
         }
 
@@ -34,16 +35,34 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        UserRole defaultRole = userRoleRepository.findByRole(Role.DEFAULT).orElse(null);
+//        UserRole defaultRole = userRoleRepository.findByRole(Role.DEFAULT).orElse(null);
 
         user
                 .setUsername(userRegisterDTO.getUsername())
                 .setEmail(userRegisterDTO.getEmail())
                 .setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()))
                 .setConfirmPassword(passwordEncoder.encode(userRegisterDTO.getConfirmPassword()))
-                .setRoles(Collections.singletonList(defaultRole));
+                .setRole(Role.DEFAULT);
+//                .setRoles(Collections.singletonList(defaultRole));
 
         userRepository.save(user);
         return true;
+    }
+
+    @Override
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void changeRole(Long userId, String role) {
+        UserEntity userEntity = userRepository.findById(userId).orElse(null);
+        switch (role) {
+            case "DEFAULT" -> userEntity.setRole(Role.DEFAULT);
+            case "MODERATOR" -> userEntity.setRole(Role.MODERATOR);
+            case "ADMIN" -> userEntity.setRole(Role.ADMIN);
+
+        }
+        userRepository.save(userEntity);
     }
 }

@@ -1,7 +1,7 @@
 package bg.softuni.moviedatabase.service.impl;
 
 import bg.softuni.moviedatabase.model.entity.UserEntity;
-import bg.softuni.moviedatabase.model.entity.UserRole;
+import bg.softuni.moviedatabase.model.entity.enums.Role;
 import bg.softuni.moviedatabase.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,11 +28,16 @@ public class MovieDBUserDetailsService implements UserDetailsService {
         return User
                 .withUsername(userEntity.getUsername())
                 .password(userEntity.getPassword())
-                .authorities(userEntity.getRoles().stream().map(MovieDBUserDetailsService::map).toList())
+                .authorities(List.of(MovieDBUserDetailsService.map(userEntity.getRole())))
+//                .authorities(userEntity.getRoles().stream().map(MovieDBUserDetailsService::map).toList())
                 .build();
     }
 
     private static GrantedAuthority map(UserRole userRole){
         return new SimpleGrantedAuthority("ROLE_" + userRole.getRole().name());
+    }
+
+    private static GrantedAuthority map(Role role) {
+        return new SimpleGrantedAuthority("ROLE_" + role.name());
     }
 }

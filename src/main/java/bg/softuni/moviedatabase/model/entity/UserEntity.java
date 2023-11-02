@@ -1,5 +1,6 @@
 package bg.softuni.moviedatabase.model.entity;
 
+import bg.softuni.moviedatabase.model.entity.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -26,11 +27,13 @@ public class UserEntity extends BaseEntity {
     private String password;
     @NotNull
     private String confirmPassword;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<UserRole> roles;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id")
+//    )
+//    private List<UserRole> roles;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
