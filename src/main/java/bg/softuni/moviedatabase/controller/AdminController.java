@@ -20,6 +20,7 @@ public class AdminController {
 
     private final UserService userService;
     private final MovieService movieService;
+
     @GetMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("users", userService.getAllUsers());
@@ -28,9 +29,9 @@ public class AdminController {
     }
 
     @PostMapping("/admin/change-role")
-    public String changeRole(@RequestParam Long userId, @RequestParam String newRole){
+    public String changeRole(@RequestParam Long userId, @RequestParam String newRole, Model model) {
         userService.changeRole(userId, newRole);
-        return "admin";
+        return admin(model);
     }
 
 }
