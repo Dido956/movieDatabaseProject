@@ -63,4 +63,9 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.save(userEntity);
     }
+
+    @Override
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }

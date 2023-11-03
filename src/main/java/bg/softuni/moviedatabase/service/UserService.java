@@ -13,4 +13,6 @@ public interface UserService {
     List<UserEntity> getAllUsers();
 
     void changeRole(Long userId, String role);
+
+    void deleteUser(Long userId);
 }

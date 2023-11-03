@@ -7,9 +7,7 @@ import bg.softuni.moviedatabase.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -31,7 +29,18 @@ public class AdminController {
     @PostMapping("/admin/change-role")
     public String changeRole(@RequestParam Long userId, @RequestParam String newRole, Model model) {
         userService.changeRole(userId, newRole);
+        //TODO: hide current role from dropdown! #DONE?
+        return admin(model);
+    }
+    @DeleteMapping("/admin/delete/user/{userId}")
+    public String deleteUser(Model model, @PathVariable Long userId){
+        userService.deleteUser(userId);
         return admin(model);
     }
 
+    @DeleteMapping("/admin/delete/movie/{movieId}")
+    public String deleteMovie(Model model, @PathVariable Long movieId){
+        movieService.deleteMovie(movieId);
+        return admin(model);
+    }
 }

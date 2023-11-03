@@ -10,71 +10,88 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <div class="px-2 py-2 my-2 text-center">
     <div class="container px-2 px-lg-4">
-<h1>Admin Panel</h1>
-<button type="button" class="btn btn-primary" th:onclick="toggleUsers()">Toggle Users</button>
-<button type="button" class="btn btn-success" th:onclick="toggleMovies()">Toggle Movies</button>
+        <h1>Admin Panel</h1>
+        <h2></h2>
+        <button type="button" class="btn btn-primary" th:onclick="toggleUsers()">Toggle Users</button>
+        <button type="button" class="btn btn-success" th:onclick="toggleMovies()">Toggle Movies</button>
 
-<div id="users" th:hidden="true">
-    <h2>Users</h2>
-    <table class="table table-sm table-dark">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Change Role</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td><span th:text="${user.id}">User ID</span></td>
-            <td><span th:text="${user.username}">Username</span></td>
-            <td><span th:text="${user.email}">Email</span></td>
-            <td><span th:text="${user.role}">Role</span></td>
-            <td>
-                <form th:action="@{/admin/change-role}" th:method="post">
-                    <input type="hidden" name="userId" th:value="${user.id}">
-                    <div class="form-group">
-                        <select id="newRole" name="newRole">
-                            <option value="DEFAULT">DEFAULT</option>
-                            <option value="MODERATOR">MODERATOR</option>
-                            <option value="ADMIN">ADMIN</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-danger" type="submit">Update role</button>
-                </form>
-            </td>
-            </select>
-        </tr>
-        </tbody>
-    </table>
-</div>
+        <div id="users" th:hidden="true">
+            <h2>Users</h2>
+            <table class="table table-sm table-dark table-bordered table-active">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Change Role</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td><span th:text="${user.id}">User ID</span></td>
+                    <td><span th:text="${user.username}">Username</span></td>
+                    <td><span th:text="${user.email}">Email</span></td>
+                    <td><span th:text="${user.role}">Role</span></td>
+                    <td>
+                        <form th:action="@{/admin/change-role}" th:method="post">
+                            <input type="hidden" name="userId" th:value="${user.id}">
+                            <div class="form-group mb-1">
+                                <select id="newRole" name="newRole">
+                                    <option value="DEFAULT" th:unless="${user.role == user.role.DEFAULT}">DEFAULT
+                                    </option>
+                                    <option value="MODERATOR" th:unless="${user.role == user.role.MODERATOR}">
+                                        MODERATOR
+                                    </option>
+                                    <option value="ADMIN" th:unless="${user.role == user.role.ADMIN}">ADMIN</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-secondary pt-0 pb-0" type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td><form th:action="@{/admin/delete/user/{userId}(userId=${user.id})}" th:method="delete">
+                        <input type="hidden" name="userId" th:value="${user.id}">
+                        <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i></button>
+                    </form>
+                    </td>
 
-<div id="movies" th:hidden="true">
-    <h2>Movies</h2>
-    <table class="table table-sm table-dark">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Director</th>
-            <th>Rating</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="movie : ${movies}">
-            <td><span th:text="${movie.id}">Movie ID</span></td>
-            <td><span th:text="${movie.title}">Title</span></td>
-            <td><span th:text="${movie.releaseDate}">Release date</span></td>
-            <td><span th:text="${movie.director.name}">Director</span></td>
-            <td><span th:text="${movie.rating}">rating</span></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-</div>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div id="movies" th:hidden="true">
+            <h2>Movies</h2>
+            <table class="table table-sm table-dark table-bordered table-active">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Release Date</th>
+                    <th>Director</th>
+                    <th>Rating</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody >
+                <tr th:each="movie : ${movies}">
+                    <td><span th:text="${movie.id}">Movie ID</span></td>
+                    <td><span th:text="${movie.title}">Title</span></td>
+                    <td><span th:text="${movie.releaseDate}">Release date</span></td>
+                    <td><span th:text="${movie.director.name}">Director</span></td>
+                    <td><span th:text="${movie.rating}">rating</span></td>
+                    <td><form th:action="@{/admin/delete/movie/{movieId}(movieId=${movie.id})}" th:method="delete">
+                        <input type="hidden" name="movieId" th:value="${movie.id}">
+                        <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i></button>
+                    </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </div>
 <script>

@@ -39,7 +39,7 @@ public class SecurityConfig {
                                 //allow static resources to anyone
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 //allow anyone to see homepage,login and register
-                                .requestMatchers("/","/login-error").permitAll()
+                                .requestMatchers("/", "/login-error").permitAll()
                                 .requestMatchers("login", "register").anonymous()
                                 .requestMatchers("/admin").hasRole(Role.ADMIN.name())
                                 //everything else is authenticated
@@ -86,4 +86,5 @@ public class SecurityConfig {
     public AuthenticationFailureHandler customAuthenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();
     }
+
 }
