@@ -15,4 +15,6 @@ public interface UserService {
     void changeRole(Long userId, String role);
 
     void deleteUser(Long userId);
+
+    UserEntity getCurrentUser(String username);
 }

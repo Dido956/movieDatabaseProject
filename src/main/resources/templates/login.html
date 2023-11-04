@@ -34,15 +34,15 @@
                 <input id="rememberme"
                        name="rememberme"
                        type="checkbox"/>
-                <label class="form-check-label" for="rememberme">Remember me</label>
+                <label class="form-check-label p-2" for="rememberme">Remember me</label>
             </div>
 
             <div class="form-group">
-                <input type="submit" class="w-100 btn btn-lg btn-primary" value="Sign Up"/>
+                <input type="submit" class="w-100 btn btn-lg btn-primary" value="Sign In"/>
             </div>
 
-            <div class="form-group">
-                <a href="#" class="ForgetPwd">New user? Register now!</a>
+            <div class="form-group mt-2">
+                <a>New user? <a th:href="@{/register}">Register now!</a></a>
             </div>
         </form>
     </div>

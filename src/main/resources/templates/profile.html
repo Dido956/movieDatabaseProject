@@ -15,10 +15,10 @@
         <div class="col col-lg-7 mb-4 mb-lg-0">
           <div class="card" style="border-radius: .5rem;">
             <div class="row g-0">
-              <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <div sec:authorize="isAuthenticated()" class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar" class="img-fluid my-5" style="width: 80px;">
-                <h5>Marie Horwitz</h5>
-                <p>Web Designer</p>
+                <h5 th:text="${#authentication.name}"></h5>
+                <p>Age: <span th:text="${userProfileDTO.age}"></span></p>
                 <i class="far fa-edit mb-5"></i>
               </div>
               <div class="col-md-8">
@@ -28,14 +28,14 @@
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
                       <h6>Email</h6>
-                      <p class="text-muted">info@example.com</p>
+                      <p class="text-muted" th:text="${userProfileDTO.email}"></p>
                     </div>
                     <div class="col-6 mb-3">
-                      <h6>Phone</h6>
-                      <p class="text-muted">123 456 789</p>
+                      <h6>Country</h6>
+                      <p class="text-muted" th:text="${userProfileDTO.country}"></p>
                     </div>
                   </div>
-                  <h6>Projects</h6>
+                  <h6>Favourite Movies</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
                     <div class="col-6 mb-3">

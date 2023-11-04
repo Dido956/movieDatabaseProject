@@ -7,40 +7,69 @@
 <head th:replace="~{fragments/commons::head}">
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
-<div class="container login-container mx-auto col-2" style="margin-top: 80px !important;">
-    <h3>Create an account</h3>
-    <form
-            th:method="POST"
-            th:action="@{/register}"
-            th:object="${userRegisterDTO}">
+<div class="row align-items-center g-lg-5 py-5">
+    <div class="col-md-10 mx-auto col-lg-5">
+        <h3>Create an account</h3>
+        <form
+                th:method="POST"
+                th:action="@{/register}"
+                th:object="${userRegisterDTO}"
+                class="p-4 p-md-3 border rounded-3 bg-light">
 
-        <div class="form-group">
-            <input type="text" class="form-control" id="username" placeholder="Username: "
-                   th:field="*{username}"/>
-            <small th:if="${#fields.hasErrors('username')}"
-                   th:errors="*{username}" class="text text-danger">Username error message</small>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="email" placeholder="Email: "
-                   th:field="*{email}"/>
-            <small th:if="${#fields.hasErrors('email')}"
-                   th:errors="*{email}" class="text text-danger">Email error message</small>
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" id="password" placeholder="Password: "
-                   th:field="*{password}"/>
-            <small th:if="${#fields.hasErrors('password')}"
-                   th:errors="*{password}" class="text text-danger">Password error message</small>
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password: "
-                   th:field="*{confirmPassword}"/>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Register"/>
-        </div>
+            <div class="form-floating mb-3">
+                <input type="text"
+                       class="form-control"
+                       id="username"
+                       placeholder="Username: "
+                       th:field="*{username}"/>
+                <label for="username">Username</label>
+                <small th:if="${#fields.hasErrors('username')}"
+                       th:errors="*{username}" class="text text-danger">Username error message</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text"
+                       class="form-control"
+                       id="email"
+                       placeholder="Email: "
+                       th:field="*{email}"/>
+                <label for="email">Email</label>
+                <small th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}" class="text text-danger">Email error message</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password"
+                       class="form-control"
+                       id="password"
+                       placeholder="Password: "
+                       th:field="*{password}"/>
+                <label for="password">Password</label>
+                <small th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}" class="text text-danger">Password error message</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password"
+                       class="form-control"
+                       id="confirmPassword"
+                       placeholder="Confirm password: "
+                       th:field="*{confirmPassword}"/>
+                <label for="confirmPassword">Confirm password:</label>
+            </div>
+            <div class="checkbox mb-3">
+                <input name="acceptTerms"
+                       type="checkbox"/>
+                <label class="form-check-label p-2" for="acceptTerms">I accept the Terms and Conditions and agree to the Privacy Policy.</label>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="w-100 btn btn-lg btn-primary" value="Register"/>
+            </div>
 
-    </form>
+            <div class="form-group mt-2">
+                <a>Already have an account? <a th:href="@{/login}">Login!</a></a>
+            </div>
+
+        </form>
+    </div>
+</div>
 </div>
 </body>
 </html>

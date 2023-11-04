@@ -4,6 +4,7 @@ import bg.softuni.moviedatabase.model.entity.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +17,9 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UserEntity extends BaseEntity {
+public class UserEntity extends BaseEntity{
     @Column(name = "username", nullable = false, unique = true)
-    @Size(min = 5,max = 16)
+    @Size(min = 5, max = 16)
     private String username;
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -27,7 +28,7 @@ public class UserEntity extends BaseEntity {
     private String password;
     @NotNull
     private String confirmPassword;
-//    @ManyToMany(fetch = FetchType.EAGER)
+    //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(
 //            name = "users_roles",
 //            joinColumns = @JoinColumn(name = "user_id"),
@@ -36,4 +37,11 @@ public class UserEntity extends BaseEntity {
 //    private List<UserRole> roles;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column(name = "age")
+    @Positive
+    private Integer age;
+    @Column(name = "country")
+    private String country;
+    @ManyToMany
+    private List<Movie> favouriteMovies;
 }

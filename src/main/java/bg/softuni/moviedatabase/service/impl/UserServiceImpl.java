@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,7 +16,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-//    private final UserRoleRepository userRoleRepository;
 
     @Override
     public boolean register(UserRegisterDTO userRegisterDTO) {
@@ -67,5 +65,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public UserEntity getCurrentUser(String username) {
+        return userRepository
+                .findByUsername(username)
+                .orElse(null);
     }
 }
