@@ -8,4 +8,9 @@ public interface MovieService {
     List<Movie> getAllMovies();
 
     void deleteMovie(Long movieId);
+
+    Movie findByTitle(String title);
+
+
+    List<Movie> getFeaturedMovies();
 }

@@ -6,17 +6,17 @@
 >
 <head th:replace="~{fragments/commons::head}">
 </head>
-<body>
+<body style="background-image: url(/images/background-img2.jpg)" class="bg">
 <header th:replace="~{fragments/commons::nav}"></header>
 <section class="pb-4">
-  <div class="bg-white border rounded-5">
-    <section class="w-100 px-4 py-5" style="background-color: #f4f5f7; border-radius: .5rem .5rem 0 0;">    <e></e>
+  <div>
+    <section>
       <div class="row d-flex justify-content-center">
         <div class="col col-lg-7 mb-4 mb-lg-0">
           <div class="card" style="border-radius: .5rem;">
             <div class="row g-0">
               <div sec:authorize="isAuthenticated()" class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar" class="img-fluid my-5" style="width: 80px;">
+                <img src="https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png" alt="avatar" class="img-fluid my-5" style="width: 80px;">
                 <h5 th:text="${#authentication.name}"></h5>
                 <p>Age: <span th:text="${userProfileDTO.age}"></span></p>
                 <i class="far fa-edit mb-5"></i>

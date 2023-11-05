@@ -42,5 +42,6 @@ public class Movie extends BaseEntity {
     private LocalDate releaseDate;
     @Column(name = "summary", length = 1000)
     private String summary;
-
+    @Column(name = "img_url", nullable = false)
+    private String imgUrl;
 }

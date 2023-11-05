@@ -6,54 +6,38 @@
 >
 <head th:replace="~{fragments/commons::head}">
 </head>
-<body>
+<body style="background-image: url(/images/background-img2.jpg)" class="bg">
 <header th:replace="~{fragments/commons::nav}"></header>
 <div class="px-2 py-2 my-2 text-center">
     <div class="container px-2 px-lg-4">
         <div class="row gx-4 gx-lg-5 align-items-center my-5">
-            <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="/images/logo-400x900.png" alt="..."></div>
+            <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="/images/logo-400x900-modified.png" alt="...">
+            </div>
             <div class="col-lg-5">
-                <h1 class="display-5 fw-bold">MovieDB</h1>
-                <p class="lead mb-4">Your go-to source for discovering and exploring the world of cinema. Dive into a vast collection of movies from various genres and eras.</p>
+                <h1 class="display-4 fw-bold">MovieDB</h1>
+                <p class="lead mb-4">Your go-to source for discovering and exploring the world of cinema. Dive into a
+                    vast collection of movies from various genres and eras.</p>
                 <a class="btn btn-secondary" th:href="@{/movies/all}">Explore now!</a>
             </div>
         </div>
         <!-- Call to Action-->
         <div class="card text-white bg-warning my-5 py-2 text-center">
-            <div class="card-body"><p class="text-dark lead m-0">Uncover hidden gems and timeless classics. Join our community of movie enthusiasts and start your cinematic journey today.</p></div>
+            <div class="card-body"><p class="text-dark lead m-0">Uncover hidden gems and timeless classics. Join our
+                community of movie enthusiasts and start your cinematic journey today.</p></div>
         </div>
         <!-- Content Row-->
+        <h2 class="py-2 text-start display-6 fw-bold">Trending</h2>
+
         <div class="row gx-4 gx-lg-5">
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">Latest releases</h2>
-                        <p class="card-text">Discover the hottest movies recently released in theaters. Get a taste of the latest blockbusters and critically acclaimed films.</p>
-                    </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">Top-rated Classics</h2>
-                        <p class="card-text">Explore the timeless classics that have stood the test of time. From epic adventures to heartwarming dramas, these films are must-watches.</p>
-                    </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">Upcoming Releases</h2>
-                        <p class="card-text">Get a sneak peek into the future of cinema. Stay informed about the most anticipated movies set to hit the big screen soon.</p>
-                    </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+            <div th:each="movie : ${movies}" class="col-md-3 mb-5">
+                <div class="card h-200">
+                    <img class="card-img-bottom" th:src="${movie.imgUrl}" th:alt="${movie.title}" />
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+
+
+</div>
 </div>
 </script>
 </body>

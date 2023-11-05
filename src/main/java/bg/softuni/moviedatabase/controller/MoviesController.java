@@ -12,4 +12,5 @@ public class MoviesController {
     private String topMovies(){
         return "top-movies";
     }
+
 }
