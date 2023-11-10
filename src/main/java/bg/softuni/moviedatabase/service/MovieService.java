@@ -11,6 +11,7 @@ public interface MovieService {
 
     Movie findByTitle(String title);
 
-
     List<Movie> getFeaturedMovies();
+
+    Movie findById(Long id);
 }

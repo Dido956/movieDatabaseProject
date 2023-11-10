@@ -6,7 +6,7 @@
 >
 <head th:replace="~{fragments/commons::head}">
 </head>
-<body style="background-image: url(/images/background-img2.jpg)" class="bg">
+<body style="background-image: url(/images/background-img2.jpg)" class="bg d-flex flex-column min-vh-100">
 <header th:replace="~{fragments/commons::nav}"></header>
 <div class="px-2 py-2 my-2 text-center">
     <div class="container px-2 px-lg-4">
@@ -31,7 +31,9 @@
         <div class="row gx-4 gx-lg-5">
             <div th:each="movie : ${movies}" class="col-md-3 mb-5">
                 <div class="card h-200">
+                    <a th:href="@{/movies/details/{id}(id=${movie.id})}">
                     <img class="card-img-bottom" th:src="${movie.imgUrl}" th:alt="${movie.title}" />
+                    </a>
                 </div>
             </div>
         </div>
@@ -39,6 +41,6 @@
 
 </div>
 </div>
-</script>
+<footer th:replace="~{fragments/commons::footer}" class=""></footer>
 </body>
 </html>

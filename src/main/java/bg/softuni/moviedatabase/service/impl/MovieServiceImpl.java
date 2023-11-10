@@ -46,6 +46,11 @@ public class MovieServiceImpl implements MovieService {
         return featuredMovies;
     }
 
+    @Override
+    public Movie findById(Long id) {
+       return movieRepository.findById(id).orElse(null);
+    }
+
     private boolean isFeaturedMovie(Movie movie) {
         String title = movie.getTitle();
         return title.equals(FEAUTERD_MOVIE_1) || title.equals(FEAUTERD_MOVIE_2) || title.equals(FEAUTERD_MOVIE_3) || title.equals(FEAUTERD_MOVIE_4);

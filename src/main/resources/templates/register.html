@@ -5,7 +5,7 @@
       xmlns:sec='http://www.thymeleaf.org/extras/spring-security'
 >
 <head th:replace="~{fragments/commons::head}">
-<body>
+<body style="background-image: url(/images/background-img2.jpg)">
 <header th:replace="~{fragments/commons::nav}"></header>
 <div class="row align-items-center g-lg-5 py-5">
     <div class="col-md-10 mx-auto col-lg-5">
@@ -55,7 +55,8 @@
                 <label for="confirmPassword">Confirm password:</label>
             </div>
             <div class="checkbox mb-3">
-                <input name="acceptTerms"
+                <input id="acceptTerms"
+                        name="acceptTerms"
                        type="checkbox"/>
                 <label class="form-check-label p-2" for="acceptTerms">I accept the Terms and Conditions and agree to the Privacy Policy.</label>
             </div>
@@ -71,5 +72,6 @@
     </div>
 </div>
 </div>
+<footer th:replace="~{fragments/commons::footer}" class=""></footer>
 </body>
 </html>
