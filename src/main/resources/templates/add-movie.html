@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'
+>
+<head th:replace="~{fragments/commons::head}">
+</head>
+<body style="background-image: url(/images/background-img2.jpg)" class="bg d-flex flex-column min-vh-100">
+<header th:replace="~{fragments/commons::nav}"></header>
+<div class="row align-items-center g-lg-5 py-5">
+    <div class="col-md-10 mx-auto col-lg-5">
+        <h3>Add a movie</h3>
+        <form class="p-4 p-md-3 border rounded-3 bg-light"
+                th:method="post"
+                th:action="@{/add-movie}"
+                th:object="${addMovieDTO}">
+            <div class="form-floating mb-3">
+                <input id="floatingTitle"
+                       name="title"
+                       th:field="*{title}"
+                       type="text"
+                       class="form-control"
+                       placeholder="Title: "/>
+                <label for="floatingTitle">Title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingImgUrl"
+                       name="imgUrl"
+                       th:field="*{imageUrl}"
+                       type="text"
+                       pattern="https?://[^\s]+\.(jpg|jpeg|png|gif)$"
+                       class="form-control"
+                       placeholder="Image URL"/>
+                <label for="floatingImgUrl">Image URL</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingRating"
+                       name="rating"
+                       th:field="*{rating}"
+                       type="number"
+                       inputmode="decimal"
+                       pattern="[0-9]\.?[0-9]*"
+                       min="0"
+                       max="10"
+                       value="0"
+                       step=".1"
+                       class="form-control"
+                       placeholder="Rating (0-10)"/>
+                <label for="floatingRating">Rating</label>
+            </div>
+            <div class="form-floating mb-3">
+        <textarea id="floatingSummary"
+                  name="summary"
+                  class="form-control"
+                  th:field="*{summary}"
+                  placeholder="Summary"
+                  minlength="40"
+                  style="height: 100px"></textarea>
+                <label for="floatingSummary">Summary</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingDirector"
+                       name="director"
+                       type="text"
+                       class="form-control"
+                       th:field="*{directorName}"
+                       pattern="[a-zA-Z]+ [a-zA-Z]+"
+                       placeholder="Director"/>
+                <label for="floatingDirector">Director</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingDuration"
+                       name="duration"
+                       type="time"
+                       inputmode="decimal"
+                       th:field="*{duration}"
+                       pattern="[0-9]\.?[0-9]*"
+                       min="0"
+                       class="form-control"
+                       placeholder="Duration (in minutes)"/>
+                <label for="floatingDuration">Duration</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingReleaseDate"
+                       name="releaseDate"
+                       type="date"
+                       th:field="*{releaseDate}"
+                       class="form-control"
+                       placeholder="Release Date"/>
+                <label for="floatingReleaseDate">Release Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingActor1"
+                       name="actor1"
+                       type="text"
+                       class="form-control"
+                       required
+                       placeholder="Actor Names:"/>
+                <label for="floatingActor1">Actor Names</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingActor2"
+                       name="actor2"
+                       type="text"
+                       class="form-control"
+                       required
+                       placeholder="Actor Names:"/>
+                <label for="floatingActor2">Actor Names</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingActor3"
+                       name="actor3"
+                       type="text"
+                       class="form-control"
+                       required
+                       placeholder="Actor Names:"/>
+                <label for="floatingActor3">Actor Names</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="floatingActor4"
+                       name="actor4"
+                       type="text"
+                       class="form-control"
+                       required
+                       placeholder="Actor Names:"/>
+                <label for="floatingActor4">Actor Names</label>
+            </div>
+
+            <div id="dynamicActorContainer">
+            </div>
+
+            <button type="button" class="btn btn-primary" id="addActorButton">Add Actor</button>
+            <div class="form-group">
+                <input type="submit" class="w-100 btn btn-lg btn-primary" value="Submit"/>
+            </div>
+        </form>
+    </div>
+    <script src="/js/dynamicActionButton.js"></script>
+</div>
+<footer th:replace="~{fragments/commons::footer}" class=""></footer>
+</body>
+</html>

@@ -1,9 +1,6 @@
 package bg.softuni.moviedatabase.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +18,8 @@ public class Actor extends BaseEntity{
     private String name;
     @Column(name = "birthdate")
     private LocalDate birthdate;
-    @ManyToMany(mappedBy = "cast")
+    @Column(name = "img_url", nullable = false)
+    private String imgUrl;
+    @ManyToMany(mappedBy = "cast", fetch = FetchType.EAGER)
     private List<Movie> movies;
 }

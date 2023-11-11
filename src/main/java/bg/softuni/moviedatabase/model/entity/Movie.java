@@ -1,18 +1,19 @@
 package bg.softuni.moviedatabase.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
+import java.sql.Time;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "movies")
 @NoArgsConstructor
+@Accessors(chain = true)
 @Getter
 @Setter
 public class Movie extends BaseEntity {
@@ -22,14 +23,14 @@ public class Movie extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "director_id")
     private Director director;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "movie_genre",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private Set<Genre> genres;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "movie_actor",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -44,4 +45,6 @@ public class Movie extends BaseEntity {
     private String summary;
     @Column(name = "img_url", nullable = false)
     private String imgUrl;
+    @Column(name = "duration", nullable = false)
+    private Time duration;
 }
