@@ -38,7 +38,12 @@
                     </div>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()"><a th:href="@{/add-movie}" class="nav-link">Add Movie</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Search</a></li>
+                <form th:action="@{/search}"
+                      th:method="POST"
+                      class="d-flex">
+                    <input name ="searchParam" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </ul>
 
             <div class="d-flex">

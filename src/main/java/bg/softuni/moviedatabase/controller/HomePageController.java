@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -19,5 +21,16 @@ public class HomePageController {
         List<Movie> featuredMovies = movieService.getFeaturedMovies();
         model.addAttribute("movies", featuredMovies);
         return "index";
+    }
+
+    @PostMapping("/search")
+    private String searchMovie(@RequestParam("searchParam") String searchParam){
+        Movie movie = movieService.findByTitle(searchParam);
+
+        if (movie != null){
+            return "redirect:/movies/details/" + movie.getId();
+        }
+        //TODO: redirect somewhere on movieNotFound();
+        return "/index";
     }
 }
