@@ -38,4 +38,10 @@ public class MoviesController {
         return "details";
     }
 
+    @GetMapping("/all-movies")
+    private String getAllMovies(Model model){
+        List<Movie> allMovies = movieService.getAllMovies();
+        model.addAttribute("allMovies", allMovies);
+        return "/all-movies";
+    }
 }
