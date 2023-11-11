@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Actor extends BaseEntity{
-    @Column(name = "name",nullable = false,unique = true)
+public class Actor extends BaseEntity {
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
     @Column(name = "birthdate")
     private LocalDate birthdate;

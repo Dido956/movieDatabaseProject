@@ -7,7 +7,7 @@ addActorButton.addEventListener('click', () => {
 
     const newActorInput = document.createElement('input');
     newActorInput.setAttribute('type', 'text');
-    newActorInput.setAttribute('name', 'actor');
+    newActorInput.setAttribute('name', 'actorName');
     newActorInput.setAttribute('placeholder', 'Enter actor name');
     newActorInput.setAttribute('required', '');
     newActorInput.classList.add('form-control');

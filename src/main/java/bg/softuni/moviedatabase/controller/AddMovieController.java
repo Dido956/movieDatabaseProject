@@ -2,15 +2,20 @@ package bg.softuni.moviedatabase.controller;
 
 import bg.softuni.moviedatabase.model.dto.AddMovieDTO;
 import bg.softuni.moviedatabase.service.MovieService;
+import jakarta.servlet.ServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 
 @Controller
 @AllArgsConstructor
@@ -27,15 +32,14 @@ public class AddMovieController {
 
     @PostMapping("/add-movie")
     private ModelAndView saveMovieToDB(@Valid
-                                       @ModelAttribute("addMovieDTO") AddMovieDTO addMovieDTO,
+                                       @ModelAttribute("addMovieDTO")
+                                       AddMovieDTO addMovieDTO,
                                        BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("add-movie");
         }
 
-//        List<String> actorNames = addMovieDTO.getDirectorName()
-        String title = addMovieDTO.getTitle();
         boolean isAdded = movieService.addMovie(addMovieDTO);
 
         String view = isAdded ? "redirect:/" : "add-movie";

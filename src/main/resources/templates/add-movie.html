@@ -12,9 +12,9 @@
     <div class="col-md-10 mx-auto col-lg-5">
         <h3>Add a movie</h3>
         <form class="p-4 p-md-3 border rounded-3 bg-light"
-                th:method="post"
-                th:action="@{/add-movie}"
-                th:object="${addMovieDTO}">
+              th:method="post"
+              th:action="@{/add-movie}"
+              th:object="${addMovieDTO}">
             <div class="form-floating mb-3">
                 <input id="floatingTitle"
                        name="title"
@@ -90,46 +90,46 @@
                        placeholder="Release Date"/>
                 <label for="floatingReleaseDate">Release Date</label>
             </div>
-            <div class="form-floating mb-3">
-                <input id="floatingActor1"
-                       name="actor1"
-                       type="text"
-                       class="form-control"
-                       required
-                       placeholder="Actor Names:"/>
-                <label for="floatingActor1">Actor Names</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input id="floatingActor2"
-                       name="actor2"
-                       type="text"
-                       class="form-control"
-                       required
-                       placeholder="Actor Names:"/>
-                <label for="floatingActor2">Actor Names</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input id="floatingActor3"
-                       name="actor3"
-                       type="text"
-                       class="form-control"
-                       required
-                       placeholder="Actor Names:"/>
-                <label for="floatingActor3">Actor Names</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input id="floatingActor4"
-                       name="actor4"
-                       type="text"
-                       class="form-control"
-                       required
-                       placeholder="Actor Names:"/>
-                <label for="floatingActor4">Actor Names</label>
-            </div>
+                <div class="form-floating mb-3">
+                    <input id="floatingActor-[[actorName]]"
+                           name="actorNames[0]"
+                           type="text"
+                           class="form-control"
+                           required
+                           placeholder="Actor Names:"/>
+                    <label for="floatingActor-[[actorName]]">Actor Names</label>
 
-            <div id="dynamicActorContainer">
-            </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input id="floatingActor2"
+                           name="actorNames[1]"
+                           type="text"
+                           class="form-control"
+                           required
+                           placeholder="Actor Names:"/>
+                    <label for="floatingActor2">Actor Names</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input id="floatingActor3"
+                           name="actorNames[2]"
+                           type="text"
+                           class="form-control"
+                           required
+                           placeholder="Actor Names:"/>
+                    <label for="floatingActor3">Actor Names</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input id="floatingActor4"
+                           name="actorNames[3]"
+                           type="text"
+                           class="form-control"
+                           required
+                           placeholder="Actor Names:"/>
+                    <label for="floatingActor4">Actor Names</label>
+                </div>
 
+                <div id="dynamicActorContainer">
+                </div>
             <button type="button" class="btn btn-primary" id="addActorButton">Add Actor</button>
             <div class="form-group">
                 <input type="submit" class="w-100 btn btn-lg btn-primary" value="Submit"/>

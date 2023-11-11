@@ -18,4 +18,6 @@ public class AddMovieDTO {
     private LocalDate releaseDate;
     private String directorName;
 
+    private List<String> actorNames;
+
 }
