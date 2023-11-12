@@ -9,7 +9,6 @@ import bg.softuni.moviedatabase.repository.DirectorRepository;
 import bg.softuni.moviedatabase.repository.MovieRepository;
 import bg.softuni.moviedatabase.service.MovieService;
 import lombok.AllArgsConstructor;
-import lombok.experimental.Accessors;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;

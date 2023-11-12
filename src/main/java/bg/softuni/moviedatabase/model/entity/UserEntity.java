@@ -28,13 +28,6 @@ public class UserEntity extends BaseEntity{
     private String password;
     @NotNull
     private String confirmPassword;
-    //    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
-//    )
-//    private List<UserRole> roles;
     @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name = "age")
@@ -42,6 +35,6 @@ public class UserEntity extends BaseEntity{
     private Integer age;
     @Column(name = "country")
     private String country;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Movie> favouriteMovies;
 }

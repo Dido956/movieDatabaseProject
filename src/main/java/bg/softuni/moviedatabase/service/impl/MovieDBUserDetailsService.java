@@ -29,13 +29,8 @@ public class MovieDBUserDetailsService implements UserDetailsService {
                 .withUsername(userEntity.getUsername())
                 .password(userEntity.getPassword())
                 .authorities(List.of(MovieDBUserDetailsService.map(userEntity.getRole())))
-//                .authorities(userEntity.getRoles().stream().map(MovieDBUserDetailsService::map).toList())
                 .build();
     }
-//
-//    private static GrantedAuthority map(UserRole userRole){
-//        return new SimpleGrantedAuthority("ROLE_" + userRole.getRole().name());
-//    }
 
     private static GrantedAuthority map(Role role) {
         return new SimpleGrantedAuthority("ROLE_" + role.name());

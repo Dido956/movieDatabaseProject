@@ -2,6 +2,7 @@ package bg.softuni.moviedatabase.service;
 
 import bg.softuni.moviedatabase.model.dto.UserRegisterDTO;
 import bg.softuni.moviedatabase.model.entity.UserEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface UserService {
     void deleteUser(Long userId);
 
     UserEntity getCurrentUser(String username);
+
+    void saveUser(UserEntity currentUser);
 }

@@ -6,6 +6,7 @@ import bg.softuni.moviedatabase.model.entity.UserEntity;
 import bg.softuni.moviedatabase.repository.UserRepository;
 import bg.softuni.moviedatabase.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -73,4 +74,10 @@ public class UserServiceImpl implements UserService {
                 .findByUsername(username)
                 .orElse(null);
     }
+
+    @Override
+    public void saveUser(UserEntity currentUser) {
+        userRepository.save(currentUser);
+    }
+
 }
