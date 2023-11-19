@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -17,7 +18,8 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UserEntity extends BaseEntity{
+@NoArgsConstructor
+public class UserEntity extends BaseEntity {
     @Column(name = "username", nullable = false, unique = true)
     @Size(min = 5, max = 16)
     private String username;
@@ -37,4 +39,11 @@ public class UserEntity extends BaseEntity{
     private String country;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Movie> favouriteMovies;
+
+    public UserEntity(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
 }

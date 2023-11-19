@@ -6,7 +6,6 @@ import bg.softuni.moviedatabase.model.entity.UserEntity;
 import bg.softuni.moviedatabase.repository.UserRepository;
 import bg.softuni.moviedatabase.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-//        UserRole defaultRole = userRoleRepository.findByRole(Role.DEFAULT).orElse(null);
 
         user
                 .setUsername(userRegisterDTO.getUsername())
@@ -40,7 +38,6 @@ public class UserServiceImpl implements UserService {
                 .setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()))
                 .setConfirmPassword(passwordEncoder.encode(userRegisterDTO.getConfirmPassword()))
                 .setRole(Role.DEFAULT);
-//                .setRoles(Collections.singletonList(defaultRole));
 
         userRepository.save(user);
         return true;
@@ -65,7 +62,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
+        UserEntity user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            userRepository.delete(user);
+        }
+//        userRepository.deleteById(userId);
     }
 
     @Override

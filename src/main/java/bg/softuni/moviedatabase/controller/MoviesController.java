@@ -7,7 +7,6 @@ import bg.softuni.moviedatabase.service.MovieService;
 import bg.softuni.moviedatabase.service.UserService;
 import bg.softuni.moviedatabase.util.DateAndTimeFormatter;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -68,9 +67,8 @@ public class MoviesController {
         }
 
         favoriteMovies.add(movie);
-        userService.saveUser(loggedUser); // Save changes
+        userService.saveUser(loggedUser);
 
-        // Redirect to the movie details page
         return "redirect:/movies/details/" + id;
     }
 
