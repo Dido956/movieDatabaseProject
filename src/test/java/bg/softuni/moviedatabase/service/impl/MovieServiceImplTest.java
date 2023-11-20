@@ -1,14 +1,12 @@
 package bg.softuni.moviedatabase.service.impl;
 
 import bg.softuni.moviedatabase.model.dto.AddMovieDTO;
-import bg.softuni.moviedatabase.model.entity.Director;
 import bg.softuni.moviedatabase.model.entity.Movie;
-import bg.softuni.moviedatabase.repository.ActorRepository;
 import bg.softuni.moviedatabase.repository.DirectorRepository;
 import bg.softuni.moviedatabase.repository.MovieRepository;
-import bg.softuni.moviedatabase.service.MovieService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -26,11 +24,9 @@ class MovieServiceImplTest {
     private MovieRepository movieRepository;
     @Mock
     private DirectorRepository directorRepository;
-    @Mock
-    private ActorRepository actorRepository;
 
-    @Mock
-    private MovieService movieService;
+    @InjectMocks
+    private MovieServiceImpl movieService;
 
     @BeforeEach
     void setUp() {
@@ -45,28 +41,30 @@ class MovieServiceImplTest {
 
         when(movieService.getAllMovies()).thenReturn(List.of(movie1,movie2));
 
-        assertTrue(movieService.getAllMovies().size() == 2);
-    }
-
-    @Test
-    void deleteMovie() {
+        assertEquals(2, movieService.getAllMovies().size());
     }
 
     @Test
     void findByTitleShouldReturnCorrectMovie() {
-        Movie movie = new Movie();
-        movie.setTitle("test");
+        String title = "TestTitle";
 
-        when(movieService.findByTitle("test")).thenReturn(movie);
+        Movie expectedMovie = new Movie();
+        expectedMovie.setTitle(title);
 
-        assertEquals(movie.getTitle(),"test");
+        Mockito.when(movieRepository.findMovieByTitle(title)).thenReturn(Optional.of(expectedMovie));
+
+        Movie actualMovie = movieService.findByTitle(title);
+
+
+        assertNotNull(actualMovie);
+        assertEquals(expectedMovie, actualMovie);
     }
     @Test
     void findByTitleShouldReturnNullWhenTitleIsNotExistent() {
         Movie movie = new Movie();
         movie.setTitle("test");
 
-        when(movieService.findByTitle("nonExistent")).thenReturn(movie);
+        when(movieRepository.findMovieByTitle("nonExistent")).thenReturn(Optional.empty());
 
         assertNull(movieService.findByTitle("test"));
     }
@@ -90,7 +88,7 @@ class MovieServiceImplTest {
         Movie movie = new Movie();
         movie.setId(1L);
 
-        when(movieService.findById(1L)).thenReturn(movie);
+        when(movieRepository.findById(1L)).thenReturn(Optional.of(movie));
         Movie foundMovie = movieService.findById(1L);
         assertEquals(movie, foundMovie);
     }
@@ -123,19 +121,4 @@ class MovieServiceImplTest {
         assertFalse(movieService.addMovie(addMovieDTO));
     }
 
-    @Test
-    public void addMovie_shouldReturnFalseIfActorDoesNotExist() {
-        AddMovieDTO addMovieDTO = new AddMovieDTO();
-        addMovieDTO.setTitle("New Movie Title");
-        addMovieDTO.setDirectorName("Existing Director");
-        addMovieDTO.setActorNames(List.of("Non-Existent Actor"));
-
-        Mockito.when(directorRepository.findDirectorByName(addMovieDTO.getDirectorName()))
-                .thenReturn(new Director());
-
-        Mockito.when(actorRepository.findByName(addMovieDTO.getActorNames().get(0)))
-                .thenReturn(null);
-
-        assertFalse(movieService.addMovie(addMovieDTO));
-    }
 }

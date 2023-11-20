@@ -12,8 +12,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
-import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static bg.softuni.moviedatabase.util.StringConstants.*;
 
@@ -111,11 +113,9 @@ public class MovieServiceImpl implements MovieService {
                 .setCast(actorSet);
     }
 
-    private static Time parseTime(AddMovieDTO addMovieDTO) {
+    public static Time parseTime(AddMovieDTO addMovieDTO) {
         String duration = addMovieDTO.getDuration();
-        LocalTime time = LocalTime.parse(duration);
-        Time parsedDuration = Time.valueOf(LocalTime.parse(duration));
-        return parsedDuration;
+        return Time.valueOf(duration);
     }
 
     private boolean isFeaturedMovie(Movie movie) {
