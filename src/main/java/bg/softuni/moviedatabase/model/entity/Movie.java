@@ -1,6 +1,7 @@
 package bg.softuni.moviedatabase.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "movies")
+@AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 @Getter

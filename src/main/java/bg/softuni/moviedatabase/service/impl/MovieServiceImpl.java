@@ -79,8 +79,10 @@ public class MovieServiceImpl implements MovieService {
         if (director == null) {
             return false;
         }
+
         List<String> actorNames = addMovieDTO.getActorNames();
         Set<Actor> actorsSet = new HashSet<>();
+
         for (String actorName : actorNames) {
             Actor actor = actorRepository.findByName(actorName);
 

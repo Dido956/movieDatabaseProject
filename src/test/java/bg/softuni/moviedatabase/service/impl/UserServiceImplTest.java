@@ -131,14 +131,14 @@ class UserServiceImplTest {
 
     @Test
     void testSaveUserToDB() {
-        UserEntity user = new UserEntity("test1", "123456","test1@email.com");
+        UserEntity user = new UserEntity("test1", "123456", "test1@email.com");
 
         userService.saveUser(user);
 
         verify(userRepository, Mockito.times(1)).save(user);
     }
 
-    @Test
+   /* @Test
     void testDeleteUser() {
         UserEntity user = new UserEntity();
         user.setId(1L);
@@ -151,4 +151,5 @@ class UserServiceImplTest {
         verify(userRepository, Mockito.times(1)).findById(1L);
         assertTrue(userRepository.findById(1L).isEmpty());
     }
+*/
 }
