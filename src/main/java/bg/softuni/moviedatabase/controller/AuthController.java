@@ -12,18 +12,32 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 @Controller
 @AllArgsConstructor
 public class AuthController {
 
     private final UserService userService;
+
     @GetMapping("/login")
-    private ModelAndView login() {
+    private ModelAndView login(Principal principal) {
+
+        if (principal != null){
+            return new ModelAndView("redirect:/profile");
+        }
+
         return new ModelAndView("/login");
     }
 
     @GetMapping("/register")
-    private ModelAndView register(@ModelAttribute("userRegisterDTO") UserRegisterDTO userRegisterDTO) {
+    private ModelAndView register(Principal principal,
+                                  @ModelAttribute("userRegisterDTO") UserRegisterDTO userRegisterDTO) {
+
+        if (principal != null){
+            return new ModelAndView("redirect:/profile");
+        }
+
         return new ModelAndView("register");
     }
 
@@ -37,7 +51,7 @@ public class AuthController {
             return new ModelAndView("register");
         }
 
-        boolean isRegistered = userService.register(userRegisterDTO);
+            boolean isRegistered = userService.register(userRegisterDTO);
 
         String view = isRegistered ? "redirect:/login" : "register";
 
@@ -50,7 +64,7 @@ public class AuthController {
     }
 
     @PostMapping("/login-error")
-    private String onFailure(@ModelAttribute("username") String username, Model model){
+    private String onFailure(@ModelAttribute("username") String username, Model model) {
         model.addAttribute("bad_credentials", true);
         model.addAttribute("username", username);
         return "login";

@@ -1,6 +1,8 @@
 package bg.softuni.moviedatabase.util;
 
 public class StringConstants {
+
+
 //    featured Movies
     public static final String FEAUTERD_MOVIE_1 = "Oppenheimer";
     public static final String FEAUTERD_MOVIE_2 = "Parasite";
