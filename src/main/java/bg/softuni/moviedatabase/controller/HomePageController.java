@@ -29,6 +29,7 @@ public class HomePageController {
         if (movie != null){
             return "redirect:/movies/details/" + movie.getId();
         }
+
         //TODO: redirect somewhere on movieNotFound();
         return "/movieNotFound";
     }

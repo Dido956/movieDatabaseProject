@@ -6,15 +6,18 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 
 
+<div class="text-center">
+        <h1 class="fw-bold display-2">Movie Catalog</h1>
+</div>
 <div class="container py-5">
     <div class="row">
         <th:block th:each="movie : ${allMovies}">
             <div class="col-lg-3 col-6 g-3">
                 <div class="lc-block">
                     <a th:href="@{/movies/details/{id}(id=${movie.id})}">
-                    <img class="img-fluid"
-                         th:src="${movie.imgUrl}" sizes="(max-width: 1080px) 100vw, 1080px" width="300" height="390"
-                         alt="Photo by {movie.photographer}" loading="lazy">
+                        <img class="img-fluid"
+                             th:src="${movie.imgUrl}" sizes="(max-width: 1080px) 100vw, 1080px" width="300" height="390"
+                             alt="Photo by {movie.photographer}" loading="lazy">
                     </a>
                 </div>
             </div>

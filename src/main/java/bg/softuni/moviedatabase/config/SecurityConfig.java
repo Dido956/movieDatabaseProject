@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/login-error","/movies/all-movies","/movies/details/**").permitAll()
                                 .requestMatchers("login", "register").permitAll()
                                 .requestMatchers("/admin").hasRole(Role.ADMIN.name())
+                                .requestMatchers("/error").permitAll()
                                 //everything else is authenticated
                                 .anyRequest().authenticated()
                 )
