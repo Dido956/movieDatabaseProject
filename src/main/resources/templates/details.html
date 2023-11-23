@@ -1,10 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments/commons::head}">
 <body style="background-image: url(/images/background-img2.jpg)" class="bg d-flex flex-column min-vh-100">
 <header th:replace="~{fragments/commons::nav}"></header>
-<!--Title name start-->
 <section class="py-4">
     <div class="container">
         <div class="row">
@@ -18,12 +17,22 @@
                         <h2 class="fw-bold display-2">
                             <th:block th:text="${movie.title}"></th:block>
                         </h2>
-
-                        <form th:action="@{/movies/details/{id}/add-to-favorites(id=${movie.id})}" method="post">
-                            <input type="hidden" name="movieId" th:value="${movie.id}" />
-                            <button id="addToFavoritesButton" class="btn btn-primary" type="submit" th:disabled="${movieAlreadyInFavorites}">Add to Favorites</button>
-                        </form>
-
+                        <th:block th:unless="${userFavouriteMovies.contains(movie.title)}">
+                            <form th:action="@{/movies/details/{id}/add-to-favorites(id=${movie.id})}" method="post">
+                                <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                                <button id="addToFavoritesButton" class="btn btn-primary" type="submit">Add to
+                                    Favorites
+                                </button>
+                            </form>
+                        </th:block>
+                        <th:block th:if="${userFavouriteMovies.contains(movie.title)}">
+                            <form th:action="@{/movies/details/remove/{id}(id=${movie.id})}" th:method="delete">
+                                <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                                <input type="hidden" name="_csrf" th:value="${_csrf}"/>
+                                <button id="removeFromFavourites" class="btn btn-danger" type="submit">Remove from Favourites
+                                </button>
+                            </form>
+                        </th:block>
 
                     </div>
                 </div>

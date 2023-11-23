@@ -1,6 +1,7 @@
 package bg.softuni.moviedatabase.service.impl;
 
 import bg.softuni.moviedatabase.model.dto.UserRegisterDTO;
+import bg.softuni.moviedatabase.model.entity.Movie;
 import bg.softuni.moviedatabase.model.entity.enums.Role;
 import bg.softuni.moviedatabase.model.entity.UserEntity;
 import bg.softuni.moviedatabase.repository.UserRepository;
@@ -78,6 +79,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserEntity currentUser) {
+        userRepository.save(currentUser);
+    }
+
+    @Override
+    public void unFavouriteMovie(UserEntity currentUser, Movie movie) {
+        List<Movie> favouriteMovies = currentUser
+                .getFavouriteMovies();
+
+        for (Movie favMovie : favouriteMovies) {
+            if (favMovie.equals(movie)) {
+                currentUser.getFavouriteMovies().remove(favMovie);
+                break;
+            }
+        }
         userRepository.save(currentUser);
     }
 

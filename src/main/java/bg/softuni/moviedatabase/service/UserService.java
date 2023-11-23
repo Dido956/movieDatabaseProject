@@ -1,6 +1,7 @@
 package bg.softuni.moviedatabase.service;
 
 import bg.softuni.moviedatabase.model.dto.UserRegisterDTO;
+import bg.softuni.moviedatabase.model.entity.Movie;
 import bg.softuni.moviedatabase.model.entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,4 +21,6 @@ public interface UserService {
     UserEntity getCurrentUser(String username);
 
     void saveUser(UserEntity currentUser);
+
+    void unFavouriteMovie(UserEntity currentUser, Movie movie);
 }

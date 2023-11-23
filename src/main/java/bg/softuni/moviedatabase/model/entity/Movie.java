@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -49,4 +50,19 @@ public class Movie extends BaseEntity {
     private String imgUrl;
     @Column(name = "duration", nullable = false)
     private Time duration;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Movie)) {
+            return false;
+        }
+
+        Movie movie = (Movie) o;
+
+        return Objects.equals(getTitle(), movie.getTitle());
+    }
 }

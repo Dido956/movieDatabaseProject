@@ -28,6 +28,7 @@ public class UserProfileController {
         return new UserProfileDTO()
                 .setEmail(userEntity.getEmail())
                 .setCountry(userEntity.getCountry())
-                .setAge(userEntity.getAge());
+                .setAge(userEntity.getAge())
+                .setFavMovies(userEntity.getFavouriteMovies());
     }
 }
