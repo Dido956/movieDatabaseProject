@@ -33,6 +33,8 @@ public class MoviesController {
                                  @PathVariable Long id,
                                  @AuthenticationPrincipal UserDetails loggedUser) {
 
+
+
         Movie movie = movieService.findById(id);
 
         List<Actor> cast = movie.getCast().stream().collect(Collectors.toList());
@@ -42,8 +44,11 @@ public class MoviesController {
         model.addAttribute("cast", cast);
         model.addAttribute(movie);
 
-        List<String> favouriteMovies = mapLoggedUserToDTO(loggedUser);
-        model.addAttribute("userFavouriteMovies", favouriteMovies);
+        if (loggedUser != null){
+            List<String> favouriteMovies = mapLoggedUserToDTO(loggedUser);
+            model.addAttribute("userFavouriteMovies", favouriteMovies);
+        }
+
 
         return "details";
     }

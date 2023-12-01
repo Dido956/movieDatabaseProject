@@ -34,14 +34,12 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(
 
                         authorizeRequests -> authorizeRequests
-                                //allow static resources to anyone
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                //allow anyone to see homepage,login and register
                                 .requestMatchers("/", "/login-error","/movies/all-movies","/movies/details/**").permitAll()
                                 .requestMatchers("login", "register").permitAll()
                                 .requestMatchers("/admin").hasRole(Role.ADMIN.name())
                                 .requestMatchers("/error").permitAll()
-                                //everything else is authenticated
+                                .requestMatchers("/about").permitAll()
                                 .anyRequest().authenticated()
                 )
 

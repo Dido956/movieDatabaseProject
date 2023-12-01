@@ -41,6 +41,4 @@ public class AddMovieController {
 
         return new ModelAndView(view);
     }
-
-
 }
