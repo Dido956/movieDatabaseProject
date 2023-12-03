@@ -9,8 +9,11 @@ import bg.softuni.moviedatabase.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -94,6 +97,16 @@ public class UserServiceImpl implements UserService {
             }
         }
         userRepository.save(currentUser);
+    }
+
+    @Override
+    public void updateProfileHits(UserEntity currentUser) {
+        UserEntity user = getCurrentUser(currentUser.getUsername());
+
+        user
+                .setProfileHits(currentUser.getProfileHits() + 1);
+
+        userRepository.save(user);
     }
 
 }

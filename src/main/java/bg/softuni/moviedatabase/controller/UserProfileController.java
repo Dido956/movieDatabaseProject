@@ -19,6 +19,8 @@ public class UserProfileController {
     @GetMapping("/profile")
     private String loadProfileData(Model model, @AuthenticationPrincipal UserDetails currentUser) {
         UserEntity user = userService.getCurrentUser(currentUser.getUsername());
+        userService.updateProfileHits(user);
+
         UserProfileDTO userProfileDTO = map(user);
         model.addAttribute(userProfileDTO);
         return "profile";

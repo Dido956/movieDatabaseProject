@@ -30,7 +30,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        //Define which urls are visible
         httpSecurity.authorizeHttpRequests(
 
                         authorizeRequests -> authorizeRequests

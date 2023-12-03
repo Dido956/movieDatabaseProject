@@ -10,7 +10,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -37,6 +40,11 @@ public class UserEntity extends BaseEntity {
     private Integer age;
     @Column(name = "country")
     private String country;
+
+    @Column(name = "profile_visits")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer profileHits;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Movie> favouriteMovies;
 
