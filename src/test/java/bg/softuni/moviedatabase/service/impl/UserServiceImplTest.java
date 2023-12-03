@@ -1,6 +1,7 @@
 package bg.softuni.moviedatabase.service.impl;
 
 import bg.softuni.moviedatabase.model.dto.UserRegisterDTO;
+import bg.softuni.moviedatabase.model.entity.Movie;
 import bg.softuni.moviedatabase.model.entity.UserEntity;
 import bg.softuni.moviedatabase.model.entity.enums.Role;
 import bg.softuni.moviedatabase.repository.UserRepository;
@@ -138,18 +139,31 @@ class UserServiceImplTest {
         verify(userRepository, Mockito.times(1)).save(user);
     }
 
-   /* @Test
+    @Test
+    void testUnFavouriteMovie() {
+        UserEntity user = new UserEntity();
+        Movie movie = new Movie();
+
+        user.setFavouriteMovies(new ArrayList<>(List.of(movie)));
+
+
+        assertFalse(user.getFavouriteMovies().isEmpty());
+        userService.unFavouriteMovie(user, movie);
+        assertTrue(user.getFavouriteMovies().isEmpty());
+    }
+
+    @Test
     void testDeleteUser() {
         UserEntity user = new UserEntity();
-        user.setId(1L);
+        user.setId(5L);
+        user.setUsername("test");
+        when(userRepository.findById(5L)).thenReturn(Optional.of(user));
+        when(userRepository.findByUsername("test")).thenReturn(Optional.of(user)).thenReturn(Optional.empty());
 
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        assertEquals(user, userRepository.findByUsername("test").orElse(null));
 
-        userService.deleteUser(1L);
+        userService.deleteUser(5L);
 
-        verify(userRepository, Mockito.times(1)).delete(user);
-        verify(userRepository, Mockito.times(1)).findById(1L);
-        assertTrue(userRepository.findById(1L).isEmpty());
+        assertNull(userRepository.findByUsername("test").orElse(null));
     }
-*/
 }

@@ -111,7 +111,7 @@ public class MovieServiceImpl implements MovieService {
                 .setCast(actorSet);
     }
 
-    private static Time parseTime(AddMovieDTO addMovieDTO) {
+    public static Time parseTime(AddMovieDTO addMovieDTO) {
         String duration = addMovieDTO.getDuration();
         LocalTime time = LocalTime.parse(duration);
         return Time.valueOf(time);

@@ -1,7 +1,10 @@
 package bg.softuni.moviedatabase.service.impl;
 
 import bg.softuni.moviedatabase.model.dto.AddMovieDTO;
+import bg.softuni.moviedatabase.model.entity.Actor;
+import bg.softuni.moviedatabase.model.entity.Director;
 import bg.softuni.moviedatabase.model.entity.Movie;
+import bg.softuni.moviedatabase.repository.ActorRepository;
 import bg.softuni.moviedatabase.repository.DirectorRepository;
 import bg.softuni.moviedatabase.repository.MovieRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +28,8 @@ class MovieServiceImplTest {
     private MovieRepository movieRepository;
     @Mock
     private DirectorRepository directorRepository;
+    @Mock
+    private ActorRepository actorRepository;
 
     @InjectMocks
     private MovieServiceImpl movieService;
@@ -39,7 +45,7 @@ class MovieServiceImplTest {
         Movie movie1 = new Movie();
         Movie movie2 = new Movie();
 
-        when(movieService.getAllMovies()).thenReturn(List.of(movie1,movie2));
+        when(movieService.getAllMovies()).thenReturn(List.of(movie1, movie2));
 
         assertEquals(2, movieService.getAllMovies().size());
     }
@@ -59,6 +65,7 @@ class MovieServiceImplTest {
         assertNotNull(actualMovie);
         assertEquals(expectedMovie, actualMovie);
     }
+
     @Test
     void findByTitleShouldReturnNullWhenTitleIsNotExistent() {
         Movie movie = new Movie();
@@ -121,5 +128,21 @@ class MovieServiceImplTest {
         assertFalse(movieService.addMovie(addMovieDTO));
     }
 
+    @Test
+    public void addMovieShouldReturnTrueWhenAllDataMappedCorrectly() {
+        AddMovieDTO addMovieDTO = new AddMovieDTO();
+        addMovieDTO.setTitle("title")
+                .setSummary("LongSummaryTextLongSummaryTextLongSummaryTextLongSummaryTextLongSummaryText")
+                .setRating(2.0)
+                .setImageUrl("https://img.jpg")
+                .setDuration("02:30")
+                .setReleaseDate(LocalDate.now())
+                .setDirectorName("Spike Lee")
+                .setActorNames(List.of("Leonardo DiCaprio"));
 
+        when(directorRepository.findDirectorByName("Spike Lee")).thenReturn(new Director());
+        when(actorRepository.findByName("Leonardo DiCaprio")).thenReturn(new Actor());
+        assertTrue(movieService.addMovie(addMovieDTO));
+    }
 }
+

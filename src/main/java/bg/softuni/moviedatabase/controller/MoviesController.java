@@ -23,11 +23,6 @@ public class MoviesController {
     private final MovieService movieService;
     private final UserService userService;
 
-    @GetMapping("/top-movies")
-    private String topMovies() {
-        return "top-movies";
-    }
-
     @GetMapping("/details/{id}")
     private String moviesDetails(Model model,
                                  @PathVariable Long id,
