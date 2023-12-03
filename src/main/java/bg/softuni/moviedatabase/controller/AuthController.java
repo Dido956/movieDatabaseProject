@@ -27,7 +27,7 @@ public class AuthController {
             return new ModelAndView("redirect:/profile");
         }
 
-        return new ModelAndView("/login");
+        return new ModelAndView("login");
     }
 
     @GetMapping("/register")
